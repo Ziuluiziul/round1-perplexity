@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini-curso Perplexity — docs & pesquisa (PIX)</title>
+  <style>
+    :root { --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#9aa8bc; --accent:#7c8cff; --border:#2a3548; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding:2rem 1rem 3rem; }
+    main { max-width:720px; margin:0 auto; }
+    h1 { font-size:1.4rem; margin:0 0 .35rem; }
+    .sub { color:var(--muted); margin:0 0 1.25rem; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.15rem 1.25rem; margin-bottom:1rem; }
+    h2 { font-size:1.05rem; margin:0 0 .7rem; }
+    ul { margin:.3rem 0 0; padding-left:1.1rem; }
+    a { color:var(--accent); }
+    .price { color:var(--accent); font-weight:600; }
+    .note { color:var(--muted); font-size:.88rem; }
+    textarea { width:100%; font-size:.65rem; line-height:1.2; background:#080b10; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:.45rem; resize:vertical; word-break:break-all; }
+    button { margin-top:.4rem; width:100%; background:var(--accent); color:#0c1017; border:0; border-radius:6px; padding:.5rem; font-weight:600; cursor:pointer; }
+    button.ok { background:#3dd68c; }
+    code { font-size:.8rem; background:#0c1017; padding:.1rem .35rem; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mini-curso — pesquisa & docs Perplexity</h1>
+    <p class="sub">Docs-only (API free parado) · 4 módulos · PDF ebook + briefs · PIX LUIZ</p>
+
+    <section class="card">
+      <h2>Pacote</h2>
+      <ul>
+        <li><a href="ebook-pesquisa-docs-perplexity.pdf"><strong>PDF ebook</strong></a> (A4) — <span class="price">R$ 50</span></li>
+        <li><a href="ebook-pesquisa-docs-perplexity-2026-09-05.md">Markdown do ebook</a></li>
+        <li>Brief R0 amostra: <a href="../briefs/ENTREGAVEL-brief-api-vs-chat-sonar-2026-09-05.md">API ≠ chat / Sonar</a></li>
+        <li>Gist: <a href="https://gist.github.com/Ziuluiziul/0deb075aedb06ade0892e6f848e80f69">ofertas + PIX</a></li>
+        <li>Hub: <a href="https://ziuluiziul.github.io/round1-perplexity/">Pages home</a> · <a href="https://huggingface.co/collections/Ziulluizziul/round1-pix-free-pack">Collection</a></li>
+      </ul>
+      <p class="note">Módulos: mapa chat≠API · Sonar→Agent · pricing oficial · brief com citações · labor docs-only.</p>
+    </section>
+
+    <section class="card">
+      <h2>PIX — EMV (fonte da verdade)</h2>
+      <p class="note" style="margin-top:0">Curso/ebook = <code>R0</code> (tag54=50). Módulo avulso = <code>R0</code> (tag54=20). Após PIX: comprovante.</p>
+      <p><strong>R$ 50</strong></p>
+      <textarea readonly rows="3" id="pix50">00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58</textarea>
+      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58">Copiar PIX R0</button>
+      <p style="margin-top:1rem"><strong>R$ 20</strong></p>
+      <textarea readonly rows="3" id="pix20">00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835</textarea>
+      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835">Copiar PIX R0</button>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll('button[data-pix]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(btn.getAttribute('data-pix'));
+          btn.textContent = 'Copiado';
+          btn.classList.add('ok');
+          setTimeout(() => { btn.textContent = btn.getAttribute('data-pix').includes('540520.00') ? 'Copiar PIX R$20' : 'Copiar PIX R$50'; btn.classList.remove('ok'); }, 1500);
+        } catch (e) { btn.textContent = 'Selecione e copie'; }
+      });
+    });
+  </script>
+</body>
+</html>
