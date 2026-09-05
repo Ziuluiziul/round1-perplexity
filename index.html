@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perplexity — Brief pesquisa citada (PIX)</title>
+  <style>
+    :root { --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#9aa8bc; --accent:#7c8cff; --border:#2a3548; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding:2rem 1rem 3rem; }
+    main { max-width:720px; margin:0 auto; }
+    h1 { font-size:1.45rem; margin:0 0 .35rem; }
+    .sub { color:var(--muted); margin:0 0 1.5rem; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.3rem; margin-bottom:1rem; }
+    h2 { font-size:1.05rem; margin:0 0 .75rem; }
+    ul.offers { list-style:none; padding:0; margin:0; }
+    ul.offers li { display:flex; justify-content:space-between; gap:1rem; padding:.55rem 0; border-bottom:1px solid var(--border); }
+    ul.offers li:last-child { border-bottom:none; }
+    .price { color:var(--accent); font-weight:600; white-space:nowrap; }
+    .pix-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:.85rem; }
+    .pix-card { margin:0; text-align:center; background:#0c1017; border:1px solid var(--border); border-radius:8px; padding:.65rem; }
+    .pix-card img { width:100%; height:auto; border-radius:4px; }
+    .pix-card figcaption { font-size:.85rem; color:var(--muted); margin:.35rem 0; font-weight:600; }
+    .pix-card textarea { width:100%; font-size:.65rem; line-height:1.2; background:#080b10; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:.4rem; resize:vertical; word-break:break-all; }
+    .pix-card button { margin-top:.4rem; width:100%; background:var(--accent); color:#0c1017; border:0; border-radius:6px; padding:.45rem .5rem; font-weight:600; cursor:pointer; }
+    .pix-card button.ok { background:#3dd68c; }
+    .note { color:var(--muted); font-size:.88rem; }
+    code { font-size:.8rem; background:#0c1017; padding:.1rem .35rem; border-radius:4px; }
+    a { color:var(--accent); }
+    footer { margin-top:1.25rem; color:var(--muted); font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Perplexity — brief de pesquisa citada</h1>
+    <p class="sub">Brief com fontes · PIX BRL (LUIZ). API free exhausted · produção chat/docs · sem top-up.</p>
+    <section class="card">
+      <h2>Ofertas ROUND1</h2>
+      <ul class="offers">
+        <li><span>Brief curto (1 pág, 3–5 fontes)</span><span class="price">R$ 20</span></li>
+        <li><span>Brief padrão (1–2 págs + resumo) — amostra no gist</span><span class="price">R$ 50</span></li>
+      </ul>
+      <p class="note">Gist: <a href="https://gist.github.com/Ziuluiziul/0deb075aedb06ade0892e6f848e80f69">ENTREGAVEL + PIX</a> · Space: <a href="https://huggingface.co/spaces/Ziulluizziul/round1-pix-r50">PIX R$50</a> · Hub: <a href="https://ziuluiziul.github.io/round1-cumulunimbus/">enxame</a></p>
+    </section>
+    <section class="card">
+      <h2>PIX — EMV tag54 (fonte da verdade)</h2>
+      <p class="note" style="margin-top:0">R$20 = <code>pix-r20</code> (não qr_0). R$50 = texto <code>_2</code>. QR só se bater com o texto.</p>
+      <div class="pix-grid">
+        <figure class="pix-card">
+          <img src="pix/qr-r20.png" alt="PIX R$ 20" />
+          <figcaption>R$ 20 · EMV 54=20.00</figcaption>
+          <textarea readonly rows="4" aria-label="PIX R$20">00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835</textarea>
+          <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835">Copiar PIX</button>
+        </figure>
+        <figure class="pix-card">
+          <img src="pix/qr-r50.png" alt="PIX R$ 50" />
+          <figcaption>R$ 50 · EMV 54=50.00</figcaption>
+          <textarea readonly rows="4" aria-label="PIX R$50">00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58</textarea>
+          <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58">Copiar PIX</button>
+        </figure>
+      </div>
+      <p class="note">Após PIX, envie o comprovante no mesmo canal do anúncio.</p>
+    </section>
+    <footer>Recebedor LUIZ · USD via Binance depois · sem cold-DM</footer>
+  </main>
+  <script>
+    document.querySelectorAll('button[data-pix]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(btn.getAttribute('data-pix'));
+          btn.textContent = 'Copiado';
+          btn.classList.add('ok');
+          setTimeout(() => { btn.textContent = 'Copiar PIX'; btn.classList.remove('ok'); }, 1500);
+        } catch (e) { btn.textContent = 'Selecione e copie'; }
+      });
+    });
+  </script>
+</body>
+</html>
