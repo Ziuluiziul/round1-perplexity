@@ -45,20 +45,21 @@
       <p class="note" style="margin-top:0">Curso/ebook = <code>R0</code> (tag54=50). Módulo avulso = <code>R0</code> (tag54=20). Após PIX: comprovante.</p>
       <p><strong>R$ 50</strong></p>
       <textarea readonly rows="3" id="pix50">00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58</textarea>
-      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58">Copiar PIX R0</button>
+      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58">Copiar PIX R$50</button>
       <p style="margin-top:1rem"><strong>R$ 20</strong></p>
       <textarea readonly rows="3" id="pix20">00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835</textarea>
-      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835">Copiar PIX R0</button>
+      <button type="button" data-pix="00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835">Copiar PIX R$20</button>
     </section>
   </main>
   <script>
     document.querySelectorAll('button[data-pix]').forEach(btn => {
+      const label = btn.textContent;
       btn.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(btn.getAttribute('data-pix'));
           btn.textContent = 'Copiado';
           btn.classList.add('ok');
-          setTimeout(() => { btn.textContent = btn.getAttribute('data-pix').includes('540520.00') ? 'Copiar PIX R$20' : 'Copiar PIX R$50'; btn.classList.remove('ok'); }, 1500);
+          setTimeout(() => { btn.textContent = label; btn.classList.remove('ok'); }, 1500);
         } catch (e) { btn.textContent = 'Selecione e copie'; }
       });
     });
